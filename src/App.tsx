@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { ProvidersPage } from './pages/ProvidersPage';
