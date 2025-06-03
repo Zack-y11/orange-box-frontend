@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useProviders } from '../hooks/useProviders';
 import { ProviderList } from '../components/providers/ProviderList';
 import { ProviderForm } from '../components/providers/ProviderForm';
+import { ProviderFiltersComponent } from '../components/providers/ProviderFilters';
 import { Modal } from '../components/ui/Modal';
 import { Button } from '../components/ui/Button';
 import type { Provider, CreateProvider } from '../types/index';
@@ -11,9 +12,14 @@ export const ProvidersPage: React.FC = () => {
     providers,
     loading,
     error,
+    pagination,
+    filters,
     createProvider,
     updateProvider,
     deleteProvider,
+    updateFilters,
+    resetFilters,
+    changePage,
     refreshProviders,
     clearError
   } = useProviders();
@@ -70,6 +76,10 @@ export const ProvidersPage: React.FC = () => {
     setSelectedProvider(null);
   };
 
+  const handleErrorDismiss = () => {
+    clearError();
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Error Alert */}
@@ -83,7 +93,7 @@ export const ProvidersPage: React.FC = () => {
               <span>{error}</span>
             </div>
             <button
-              onClick={clearError}
+              onClick={handleErrorDismiss}
               className="text-red-500 hover:text-red-700"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -96,6 +106,14 @@ export const ProvidersPage: React.FC = () => {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
+        {/* Filters */}
+        <ProviderFiltersComponent
+          filters={filters}
+          onFiltersChange={updateFilters}
+          onReset={resetFilters}
+        />
+
+        {/* Provider List */}
         <ProviderList
           providers={providers}
           loading={loading}
@@ -103,6 +121,10 @@ export const ProvidersPage: React.FC = () => {
           onEdit={handleEditProvider}
           onDelete={handleDeleteProvider}
           onRefresh={refreshProviders}
+          currentPage={pagination.currentPage}
+          totalPages={pagination.totalPages}
+          totalItems={pagination.totalItems}
+          onPageChange={changePage}
         />
       </div>
 

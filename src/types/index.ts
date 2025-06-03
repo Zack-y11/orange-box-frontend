@@ -56,6 +56,16 @@ export interface ProductFilters {
     limit?: number;
 }
 
+// Provider filters interface
+export interface ProviderFilters {
+    search?: string;
+    name?: string;
+    sortBy?: string;
+    order?: 'asc' | 'desc';
+    page?: number;
+    limit?: number;
+}
+
 // API Response interface
 export interface ApiResponse<T> {
     success: boolean;
