@@ -2,22 +2,20 @@
 export interface Provider {
     _id: string;
     name: string;
-    email: string;
+    email?: string;
     phone: string;
     address: string;
     description: string;
-    status: 'active' | 'inactive' | 'discontinued';
     createdAt: Date;
     updatedAt: Date;
 }
 
 export interface CreateProvider {
     name: string;
-    email: string;
+    email?: string;
     phone: string;
     address: string;
     description: string;
-    status?: 'active' | 'inactive';
 }
 
 // Product interfaces
@@ -40,6 +38,22 @@ export interface CreateProduct {
     provider: string;
     stock: number;
     status?: 'active' | 'inactive';
+}
+
+export interface ProductWithProvider extends Omit<Product, 'provider'>{
+    provider: Provider
+}
+
+export interface ProductFilters {
+    search?: string;
+    status?: 'active' | 'inactive' | 'discontinued';
+    provider?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    stock?: number;
+    sort?: 'asc' | 'desc';
+    page?: number;
+    limit?: number;
 }
 
 // API Response interface
