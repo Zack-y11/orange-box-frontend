@@ -30,6 +30,7 @@ export const useProviders = (): UseProvidersReturn => {
             setError(null);
             const response = await providerService.getAll();
             setProviders(response.data || []);
+            console.log(response.data);
         } catch (err) {
             handleError(err, 'Failed to fetch providers');
         } finally {
