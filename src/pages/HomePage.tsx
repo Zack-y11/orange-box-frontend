@@ -39,14 +39,13 @@ export const HomePage: React.FC = () => {
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Products Management</h3>
             <p className="text-gray-600 mb-4">
-              Manage your product catalog and inventory
+              Manage your product catalog and inventory with great features
             </p>
             <Button 
-              variant="outline" 
+              onClick={() => window.location.href = '/products'}
               className="w-full"
-              disabled
             >
-              Coming Soon
+              Go to Products
             </Button>
           </div>
         </div>
